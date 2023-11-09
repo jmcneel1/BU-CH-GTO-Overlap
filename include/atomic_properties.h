@@ -132,6 +132,45 @@ std::string bueht_atomic_symbols[] = {
       "Kr"
     };
 
+    std::string bueht_atomic_names[] = {
+      "HYDROGEN",
+      "HELIUM",
+      "LITHIUM",
+      "BERYLLIUM",
+      "BORON",
+      "CARBON",
+      "NITROGEN",
+      "OXYGEN",
+      "FLUORINE",
+      "NEON",
+      "SODIUM",
+      "MAGNESIUM",
+      "ALUMINUM",
+      "SILICON"
+      "PHOSPHORUS",
+      "SULFUR",
+      "CHLORINE",
+      "ARGON",
+      "POTASSIUM",
+      "CALCIUM",
+      "SCANDIUM",
+      "TITANIUM",
+      "VANADIUM",
+      "CHROMIUM",
+      "MANGANESE",
+      "IRON",
+      "COBALT",
+      "NICKEL",
+      "COPPER",
+      "ZINC",
+      "GALLIUM",
+      "GERMANIUM",
+      "ARSENIC",
+      "SELENIUM",
+      "BROMINE",
+      "KRYPTON"
+    };
+
 } // End of namespace BUEHT
 
 #endif
