@@ -36,6 +36,18 @@ namespace BUEHT
     }
   }
 
+  void StringToUpper ( std::string & caps )
+  {
+    int i = 0;
+    char c;
+    while (caps[i])
+    {
+      c = caps[i];
+      caps[i] = toupper(c);
+      i++;
+    }
+  }
+
 }
 
 #endif

@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "atomic_properties.h"
 #include "overlap.h"
+#include "bueht_util.h"
 
 /*
 
@@ -19,6 +20,7 @@
   3: The quantum number L for atom 1 (S=0, P=1, D=2)
   4. The same information for atom 2
   5. The Basis Set (options in share folder)
+  6. When applicable, the shell number (in the case of split-valence)
 
   A small table will be printed that will show the resulting overlaps.
 
@@ -29,13 +31,19 @@ int main ()
   // l1 = L for atom 1, l2 = L for atom 2
   // n1 is the n quantum number for atom 1
   // n2 is the n quantum number for atom 2
+  // s1 is the shell number for atom 1
+  // s2 is the shell number for atom 2
   // (1 for first row, 2 for second row, 3 for third row)
 
-  int atomicnum1, atomicnum2, l1, l2, n1, n2;
+  int atomicnum1, atomicnum2, l1, l2, n1, n2, s1(1), s2(1);
  
   // The coordinates (angstrom)
 
   double x1, x2, y1, y2, z1, z2;
+
+  // The name of the basis set
+
+  std::string basis_name;
   
   // Now we start interacting with the user
 
@@ -53,9 +61,31 @@ int main ()
   std::cout << "Please enter the angular moments (L=0,1,2) for atom 1: ";
   std::cin >> l1;
 
-  // Check to make sure that this BF exists.
+  std::cout << "Please enter the atomic number of center 2: ";
+  std::cin >> atomicnum2;
+  std::cout << "X-Coordinate atom 2 (Angstroem): ";
+  std::cin >> x2;
+  std::cout << "Y-Coordinate atom 2 (Angstroem): ";
+  std::cin >> y2;
+  std::cout << "Z-Coordinate atom 2 (Angstroem): ";
+  std::cin >> z2;
+  std::cout << "Please enter the angular moments (L=0,1,2) for atom 2: ";
+  std::cin >> l2;
+
+  std::cout << "Please enter the basis set name: ";
+  std::cin >> basis_name;
+
+  // Bring the name to uppercase
+
+  BUEHT::StringToUpper(basis_name);
+
+  std::cout << basis_name << std::endl;
+
+  /*
+
+  // Check to make sure that this BF exists for atom 1.
   // If not, prompt the user again...
-  
+
   while ( true )
   {
     if ( (*(BUEHT::bueht_param_ptr[atomicnum1-1]+count)).an == atomicnum1 )
@@ -75,16 +105,7 @@ int main ()
     }
     count = count + 1;
   }
-  std::cout << "Please enter the atomic number of center 2: ";
-  std::cin >> atomicnum2;
-  std::cout << "X-Coordinate atom 2 (Angstroem): ";
-  std::cin >> x2;
-  std::cout << "Y-Coordinate atom 2 (Angstroem): ";
-  std::cin >> y2;
-  std::cout << "Z-Coordinate atom 2 (Angstroem): ";
-  std::cin >> z2;
-  std::cout << "Please enter the angular moments (L=0,1,2) for atom 2: ";
-  std::cin >> l2;
+  
   count = 0;
   while ( true )
   {
@@ -302,4 +323,5 @@ int main ()
     std::cout << std::setw(10) << std::fixed << std::setprecision(3) << overlap[23];
     std::cout << std::setw(10) << std::fixed << std::setprecision(3) << overlap[24] << std::endl << std::endl;
   }
+  */
 }
