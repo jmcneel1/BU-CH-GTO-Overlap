@@ -78,10 +78,28 @@ int main ()
 
   BUEHT::StringToUpper(basis_name);
 
+  // And now make sure it is supported
+
+  int index = 0;
+  bool basis_good = false;
+  while ( bueht_supported_basis_sets[index] )
+  {
+    if ( basis_name == bueht_supported_basis_sets[index] )
+    {
+      basis_good = true;
+    }
+  }
+
+  if (!basis_good)
+  {
+    std::cout << basis_name << " not supported! Exiting..." << std: endl;
+    std::exit(1);
+  }
+
   std::cout << basis_name << std::endl;
   
   // Check to make sure that this shell exists for atom 1.
-  // If not, prompt the user again...
+  // If not, exit
 
   /*
 
