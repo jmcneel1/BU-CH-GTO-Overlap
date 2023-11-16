@@ -12,6 +12,9 @@
   integral between shells on different atoms. It is intended
   to be used as a pedagogical tool perhaps by providing 
   complementary information to a Walsh diagram...
+  
+  For basis sets with split valence, the matrix for each 
+  shell will be included in the printout.
 
   Thus will be prompted for the following:
 
@@ -20,7 +23,6 @@
   3: The quantum number L for atom 1 (S=0, P=1, D=2)
   4. The same information for atom 2
   5. The Basis Set (options in share folder)
-  6. When applicable, the shell number (in the case of split-valence)
 
   A small table will be printed that will show the resulting overlaps.
 
@@ -31,11 +33,8 @@ int main ()
   // l1 = L for atom 1, l2 = L for atom 2
   // n1 is the n quantum number for atom 1
   // n2 is the n quantum number for atom 2
-  // s1 is the shell number for atom 1
-  // s2 is the shell number for atom 2
-  // (1 for first row, 2 for second row, 3 for third row)
 
-  int atomicnum1, atomicnum2, l1, l2, n1, n2, s1(1), s2(1);
+  int atomicnum1, atomicnum2, l1, l2, n1, n2;
  
   // The coordinates (angstrom)
 
@@ -58,7 +57,7 @@ int main ()
   std::cout << "Z-Coordinate atom 1 (Angstroem): ";
   std::cin >> z1;
   int count = 0;
-  std::cout << "Please enter the angular moments (L=0,1,2) for atom 1: ";
+  std::cout << "Please enter the angular moments (L=0,1,2,...) for atom 1: ";
   std::cin >> l1;
 
   std::cout << "Please enter the atomic number of center 2: ";
@@ -69,7 +68,7 @@ int main ()
   std::cin >> y2;
   std::cout << "Z-Coordinate atom 2 (Angstroem): ";
   std::cin >> z2;
-  std::cout << "Please enter the angular moments (L=0,1,2) for atom 2: ";
+  std::cout << "Please enter the angular moments (L=0,1,2,...) for atom 2: ";
   std::cin >> l2;
 
   std::cout << "Please enter the basis set name: ";
@@ -80,6 +79,9 @@ int main ()
   BUEHT::StringToUpper(basis_name);
 
   std::cout << basis_name << std::endl;
+  
+  // Check to make sure that this shell exists for atom 1.
+  // If not, prompt the user again...
 
   /*
 
