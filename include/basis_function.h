@@ -13,9 +13,6 @@
 
   This BasisFunction class stores relevant information for a shell.
 
-  Defaults are from Greg Landrum's YAeHMOP 
-   (https://github.com/greglandrum/yaehmop.git)
-
   Private Variables include:
 
   1. The principle quantum number (myN)
@@ -31,9 +28,8 @@
              (2*z1)^(3.5)*(2*z2)^(3.5)/(2*n)! * 
              (2*n)!/(z1+z2)^(2n+1) = 1
   4. The Zetas for each primitive
+  5. The number of primitives.
 
-  These basis function store two primitives for EACH, with the 
-  single-zeta BFs found by the second coefficient being 0.0.
 */
 
 namespace BUEHT
@@ -49,7 +45,7 @@ class BasisFunction
                    const std::vector<double> & coeffs, 
                    const std::vector<double> & zeta )
     {
-      if ( n > 0 && n < 5 ) // We are only going to Kr, with n=4 as the max
+      if ( n > 0 && n < 8 ) // We allow the full PT here
       {
         myN = n;
         if ( l < n )
@@ -182,6 +178,19 @@ class BasisFunction
 
     unsigned int GetNumPrimitives () const { return myNumPrimitives; }
 
+    bool IsGood ( const std::string & basis_name, const int & atomic_num )
+    {
+      std::ifstream inFile(basis_name+".bs");
+      if ( inFile.good() )
+      {
+        std::cout << "LALA\n";
+      }
+      else
+      {
+        return false;
+      }
+    }
+
     friend std::ostream & operator << ( std::ostream & buffer, 
                                    const BUEHT::BasisFunction & basis_function )
     {
@@ -211,6 +220,11 @@ class BasisFunction
     unsigned int myNumPrimitives;
     std::vector<double> myCoefficients;
     std::vector<double> myZetas;
+
+    bool IsNormalized () const
+    {
+      std::vector<int>
+    }
 
 };
 

@@ -82,17 +82,19 @@ int main ()
 
   int index = 0;
   bool basis_good = false;
-  while ( bueht_supported_basis_sets[index] )
+  while ( index < *(&BUEHT::bueht_supported_basis_sets+1) - BUEHT::bueht_supported_basis_sets )
   {
-    if ( basis_name == bueht_supported_basis_sets[index] )
+    if ( basis_name == BUEHT::bueht_supported_basis_sets[index] )
     {
       basis_good = true;
+      break;
     }
+    index++;
   }
 
   if (!basis_good)
   {
-    std::cout << basis_name << " not supported! Exiting..." << std: endl;
+    std::cout << basis_name << " not supported! Exiting..." << std::endl;
     std::exit(1);
   }
 

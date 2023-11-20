@@ -2,6 +2,7 @@
 #define _bueht_rotate
 
 #include "bueht_parameters.h"
+#include "basis_set.h"
 
 /*
   James McNeely
