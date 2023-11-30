@@ -42,7 +42,7 @@ int main ()
 
   // The name of the basis set
 
-  std::string basis_name;
+  std::string basis_name, line;
   
   // Now we start interacting with the user
 
@@ -100,8 +100,18 @@ int main ()
 
   std::cout << basis_name << std::endl;
   
-  // Check to make sure that this shell exists for atom 1.
+  // Check to make sure that this BF exists for atom 1.
   // If not, exit
+
+  std::ifstream basis_buffer(basis_name+".bs");
+  if ( basis_buffer.good() )
+  {
+    std::getline(basis_buffer,line);
+    while ( line.find(bueht_atomic_names[atomicnum1-1]) != std::string::npos )
+    {
+      std::getline(basis_buffer,line);
+    }
+  }
 
   /*
 
