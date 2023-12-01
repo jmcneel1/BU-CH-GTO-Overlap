@@ -76,7 +76,8 @@ class BasisFunction
       }
     }
 
-    BasisFunction ( const int & n, const int & l, const int & atomic_num ) 
+    BasisFunction ( const int & n, const int & l, const int & atomic_num,
+                    const int & shell_number, const std::string & basis_name ) 
     {
       bool found = false;
       int count = 0;

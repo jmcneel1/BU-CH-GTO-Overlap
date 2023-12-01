@@ -9,18 +9,16 @@
   James McNeely
 
   This is a simple tool that will calculate the overlap 
-  integral between shells on different atoms. It is intended
+  integral between different atoms. It is intended
   to be used as a pedagogical tool perhaps by providing 
   complementary information to a Walsh diagram...
   
-  For basis sets with split valence, the matrix for each 
-  shell will be included in the printout.
+  All available shells for a given basis set will be printed.
 
   Thus will be prompted for the following:
 
   1: The atomic number of atom 1.
   2: The coordinates (X,Y,Z-Angstroem) of atom 1.
-  3: The quantum number L for atom 1 (S=0, P=1, D=2)
   4. The same information for atom 2
   5. The Basis Set (options in share folder)
 
@@ -34,7 +32,7 @@ int main ()
   // n1 is the n quantum number for atom 1
   // n2 is the n quantum number for atom 2
 
-  int atomicnum1, atomicnum2, l1, l2, n1, n2;
+  int atomicnum1, atomicnum2;
  
   // The coordinates (angstrom)
 
@@ -47,7 +45,7 @@ int main ()
   // Now we start interacting with the user
 
   std::cout << "Welcome!\nThis is a simple utility to calculate the overlap\n";
-  std::cout << "integral between shells.\n";
+  std::cout << "integral between atoms.\n";
   std::cout << "Please enter the atomic number of center 1: ";
   std::cin >> atomicnum1;
   std::cout << "X-Coordinate atom 1 (Angstroem): ";
@@ -56,9 +54,6 @@ int main ()
   std::cin >> y1;
   std::cout << "Z-Coordinate atom 1 (Angstroem): ";
   std::cin >> z1;
-  int count = 0;
-  std::cout << "Please enter the angular moments (L=0,1,2,...) for atom 1: ";
-  std::cin >> l1;
 
   std::cout << "Please enter the atomic number of center 2: ";
   std::cin >> atomicnum2;
@@ -100,18 +95,11 @@ int main ()
 
   std::cout << basis_name << std::endl;
   
-  // Check to make sure that this BF exists for atom 1.
-  // If not, exit
+  // Read in the basis functions.
+  // The BasisFunction class will perform all necessary checks.
 
-  std::ifstream basis_buffer(basis_name+".bs");
-  if ( basis_buffer.good() )
-  {
-    std::getline(basis_buffer,line);
-    while ( line.find(bueht_atomic_names[atomicnum1-1]) != std::string::npos )
-    {
-      std::getline(basis_buffer,line);
-    }
-  }
+  BUEHT::BasisFunction shells1(basis_name,atomicnum1,n1,l1);
+  BUEHT::BasisFunction shells2(basis_name,atomicnum2,n2,l2);
 
   /*
 

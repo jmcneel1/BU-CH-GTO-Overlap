@@ -52,7 +52,6 @@ class Atom
       {
         myAtomicNumber = anum;
         myAtomicMass = bueht_atomic_masses[anum-1];
-        myNumShells = (bueht_param_ptr[anum] - bueht_param_ptr[anum-1]);
       }
       else
       {
@@ -73,7 +72,6 @@ class Atom
       Atom tmp(anum);
       this->myAtomicNumber = tmp.myAtomicNumber;
       this->myAtomicMass = tmp.myAtomicMass;
-      this->myNumShells = tmp.myNumShells;
     }
   
     /*
@@ -88,7 +86,6 @@ class Atom
       Atom tmp(anum);
       this->myAtomicNumber = tmp.myAtomicNumber;
       this->myAtomicMass = tmp.myAtomicMass;
-      this->myNumShells = tmp.myNumShells;
     }
 
     /*
@@ -117,8 +114,6 @@ class Atom
     double GetY() const { return myY; }
 
     double GetZ() const { return myZ; }
-
-    int GetNumShells () const { return myNumShells; }
 
     std::vector<double> GetCoordinates() const
     {
@@ -187,8 +182,6 @@ class Atom
         ss >> temp;
         ss << atom.myAtomicNumber;
         atom.myAtomicMass = bueht_atomic_masses[atom.myAtomicNumber-1];
-        atom.myNumShells = (bueht_param_ptr[atom.myAtomicNumber]-
-                            bueht_param_ptr[atom.myAtomicNumber-1]);
       }
       else
       {
@@ -220,7 +213,6 @@ class Atom
       {
         myAtomicNumber = index + 1;
         myAtomicMass = bueht_atomic_masses[index];
-        myNumShells = bueht_param_ptr[myAtomicNumber] - bueht_param_ptr[myAtomicNumber-1];
       }
       else
       {
@@ -235,7 +227,6 @@ class Atom
       {
         myAtomicNumber = anum;
         myAtomicMass = bueht_atomic_masses[anum-1];
-        myNumShells = bueht_param_ptr[myAtomicNumber] - bueht_param_ptr[myAtomicNumber-1];
       }
     }
 
@@ -279,9 +270,6 @@ class Atom
     double myAtomicMass;
     double myMulliken;
     int myAtomicNumber;
-    int myNumShells;
-    int myNumCore;
-
 };
 
 }
