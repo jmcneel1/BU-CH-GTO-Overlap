@@ -1,6 +1,7 @@
 #ifndef _bueht_parameters
 #define _bueht_parameters
 
+#include <vector>
 #include <bueht_constants.h>
 
 namespace BUEHT
@@ -38,7 +39,7 @@ struct RealSphericalHarmonic
   short l, m, index, length;
   double factor;
   int x, y, z;
-}
+};
 
 /*
   Here we store the expansion of real spherical harmonics
@@ -49,7 +50,7 @@ struct RealSphericalHarmonic
   Also the order above for RealSphericalHarmonic holds ... x, y, z
 */
 
-std::vector<RealSphericalHarmonic> RealSphericalHarmonics [] =
+BUEHT::RealSphericalHarmonic RealSphericalHarmonics [] =
 {
   {0,0,0,1,0.282094791773878,0,0,0}, // S
   {1,-1,0,1,0.488602511902920,0,1,0}, // PY

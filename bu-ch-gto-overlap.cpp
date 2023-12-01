@@ -26,7 +26,7 @@
 
 */
 
-int main ()
+int main ( int argc, char* argv[] )
 {
   // l1 = L for atom 1, l2 = L for atom 2
   // n1 is the n quantum number for atom 1
@@ -41,6 +41,8 @@ int main ()
   // The name of the basis set
 
   std::string basis_name, line;
+
+  std::cout << __cplusplus << "\n\n";
   
   // Now we start interacting with the user
 
@@ -63,8 +65,6 @@ int main ()
   std::cin >> y2;
   std::cout << "Z-Coordinate atom 2 (Angstroem): ";
   std::cin >> z2;
-  std::cout << "Please enter the angular moments (L=0,1,2,...) for atom 2: ";
-  std::cin >> l2;
 
   std::cout << "Please enter the basis set name: ";
   std::cin >> basis_name;
@@ -98,8 +98,8 @@ int main ()
   // Read in the basis functions.
   // The BasisFunction class will perform all necessary checks.
 
-  BUEHT::BasisFunction shells1(basis_name,atomicnum1,n1,l1);
-  BUEHT::BasisFunction shells2(basis_name,atomicnum2,n2,l2);
+ // BUEHT::BasisFunction shells1(basis_name,atomicnum1,n1,l1);
+ // BUEHT::BasisFunction shells2(basis_name,atomicnum2,n2,l2);
 
   /*
 

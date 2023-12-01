@@ -2,6 +2,7 @@
 #define _bueht_basis_function
 
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
 #include <bueht_parameters.h>
 #include <math.h>
@@ -81,7 +82,7 @@ class BasisFunction
     {
       bool found = false;
       int count = 0;
-      while ( ! found )
+     /* while ( ! found )
       {
         if ( (*(bueht_param_ptr[atomic_num-1]+count)).an == atomic_num )
         {
@@ -113,7 +114,7 @@ class BasisFunction
           std::exit(1);
         }
         count++;
-      }
+      }*/
     }
 
     double GetExponent ( const int & index ) const
@@ -181,7 +182,8 @@ class BasisFunction
 
     bool IsGood ( const std::string & basis_name, const int & atomic_num )
     {
-      std::ifstream inFile(basis_name+".bs");
+      std::string fname = basis_name + ".bs";
+      std::ifstream inFile(fname.c_str());
       if ( inFile.good() )
       {
         std::cout << "LALA\n";
@@ -224,8 +226,9 @@ class BasisFunction
 
     bool IsNormalized () const
     {
-      std::vector<int>
-    }
+      //std::vector<int>
+      return true;
+    };
 
 };
 
