@@ -32,6 +32,11 @@ int main ( int argc, char* argv[] )
   // n1 is the n quantum number for atom 1
   // n2 is the n quantum number for atom 2
 
+  // First we assume that the share directory is in the same
+  // folder as the executable...
+
+  std::string basis_loc = BUEHT::GetBasesLocation(argv[0]);
+
   int atomicnum1, atomicnum2;
  
   // The coordinates (angstrom)

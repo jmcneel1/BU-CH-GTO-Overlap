@@ -47,6 +47,20 @@ namespace BUEHT
       i++;
     }
   }
+
+  std::string GetBasesLocation ( char* executable )
+  {
+    std::string str_executable(executable);
+    #if defined(_WIN32) || defined(WIN32)
+      int pos = str_executable.rfind('\\');
+    #else
+      int pos = str_executable.rfind('/');
+    #endif
+
+    std::string path = str_executable.substr(0,pos+1);
+
+    return path+"share/";
+  }
   
 }
 
