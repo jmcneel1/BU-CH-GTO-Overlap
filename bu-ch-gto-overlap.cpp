@@ -43,11 +43,9 @@ int main ( int argc, char* argv[] )
 
   double x1, x2, y1, y2, z1, z2;
 
-  // The name of the basis set
+  // The name of the basis set and a placeholder variable for streaming
 
   std::string basis_name, line;
-
-  std::cout << __cplusplus << "\n\n";
   
   // Now we start interacting with the user
 
@@ -100,8 +98,8 @@ int main ( int argc, char* argv[] )
 
   std::cout << basis_name << std::endl;
   
-  // Read in the basis functions.
-  // The BasisFunction class will perform all necessary checks.
+  // Read in the basis set.
+  // The BasisSet class will perform all necessary checks.
 
  // BUEHT::BasisFunction shells1(basis_name,atomicnum1,n1,l1);
  // BUEHT::BasisFunction shells2(basis_name,atomicnum2,n2,l2);
