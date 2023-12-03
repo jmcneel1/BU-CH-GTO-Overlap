@@ -101,8 +101,10 @@ int main ( int argc, char* argv[] )
   // Read in the basis set.
   // The BasisSet class will perform all necessary checks.
 
- // BUEHT::BasisFunction shells1(basis_name,atomicnum1,n1,l1);
- // BUEHT::BasisFunction shells2(basis_name,atomicnum2,n2,l2);
+  BUEHT::BasisSet basis1(basis_loc+basis_name+".bs",atomicnum1);
+  BUEHT::BasisSet basis2(basis_loc+basis_name+".bs",atomicnum2);
+
+  std::cout << basis1.GetDimensions() << "\n";
 
   /*
 

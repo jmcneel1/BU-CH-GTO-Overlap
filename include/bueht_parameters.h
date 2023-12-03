@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <bueht_constants.h>
+#include <map>
 
 namespace BUEHT
 {
@@ -27,6 +28,9 @@ std::string bueht_supported_basis_sets[] = {
   "DEF2-TZVP",
   "STO-3G"
 };
+
+std::map<char,int> bueht_angular_momentum{{'S',0},{'P',1},{'D',2},{'F',3},
+                                          {'G',4},{'H',5},{'I',6}};
 
 /*
   This is a struct to store angular momentum i,j,k alongside

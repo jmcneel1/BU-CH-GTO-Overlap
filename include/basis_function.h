@@ -42,37 +42,20 @@ class BasisFunction
 
     BasisFunction () = default;
 
-    BasisFunction ( int n, int l, int num_primitive,
+    BasisFunction ( int l, int num_primitive,
                    const std::vector<double> & coeffs, 
                    const std::vector<double> & zeta )
     {
-      if ( n > 0 && n < 8 ) // We allow the full PT here
+      myL = l;
+      if ( (num_primitive == coeffs.size()) && (num_primitive == zeta.size()) )
       {
-        myN = n;
-        if ( l < n )
-        {
-          myL = l;
-          if ( (num_primitive == coeffs.size()) && (num_primitive == zeta.size()) )
-          {
-            this->myNumPrimitives = num_primitive;
-            this->myZetas = zeta;
-            this->myCoefficients = coeffs;
-          }
-          else
-          {
-            std::cout << "Incompatible primitize count and vector size! Exiting...\n";
-            std::exit(1);
-          }
-        }
-        else
-        {
-          std::cout << "Invalid Angular Momentum Quantum Number (l)! Exiting...\n";
-          std::exit(1);
-        }
+        this->myNumPrimitives = num_primitive;
+        this->myZetas = zeta;
+        this->myCoefficients = coeffs;
       }
       else
       {
-        std::cout<< "Invalid Principle Quantum Number (n)! Exiting...\n"; 
+        std::cout << "Incompatible primitize count and vector size! Exiting...\n";
         std::exit(1);
       }
     }
@@ -153,29 +136,6 @@ class BasisFunction
       return myZetas;
     }
 
-    void SetN (int n)
-    {
-      if ( n < 5 )
-      {
-        if ( std::abs(myL) < n )
-        {
-          myN = n;
-        }
-        else
-        {
-          std::cout << "Invalid Angular Momentum Quantum Number (l)! Exiting...\n";
-          std::exit(1);
-        }
-      }
-      else
-      {
-        std::cout<< "Invalid Principle Quantum Number (n)! Exiting...\n";
-        std::exit(1);
-      }
-    }
-
-    int GetN () const { return myN; }
-
     int GetL () const { return myL; }
 
     unsigned int GetNumPrimitives () const { return myNumPrimitives; }
@@ -197,7 +157,6 @@ class BasisFunction
     friend std::ostream & operator << ( std::ostream & buffer, 
                                    const BUEHT::BasisFunction & basis_function )
     {
-      buffer << "N: " << basis_function.myN << "\n";
       buffer << "L: " << basis_function.myL << "\n";
       buffer << "Number of Primitives: " << basis_function.myNumPrimitives << "\n";
       for ( unsigned int i = 0; i < basis_function.myNumPrimitives; i++ )
@@ -217,8 +176,6 @@ class BasisFunction
     }
 
   private:
-
-    int myN;
     int myL;
     unsigned int myNumPrimitives;
     std::vector<double> myCoefficients;
