@@ -18,6 +18,7 @@ class BasisSet : public BasisFunction
 {
 
   public:
+
     BasisSet( const std::string & fname, int atomicnum )
     {
       char l;
@@ -71,14 +72,24 @@ class BasisSet : public BasisFunction
         std::cout << "Invalid Basis for " << element << "! Exiting...\n";
         std::exit(1);
       }
-
       inFile.close();
+    }
+
+    int GetNumShells () const
+    {
+      return myBasisSet.size();
     }
 
     int GetDimensions () const
     {
-      return myBasisSet.size();
+      int dimensions(0);
+      for ( unsigned int i = 0; i < myBasisSet.size(); i++ )
+      {
+        dimensions += myBasisSet[i].GetL() * ( myBasisSet[i].GetL() + 1 );
+      }
+      return dimensions;
     }
+
   private:
     std::vector<BUEHT::BasisFunction> myBasisSet;
 };

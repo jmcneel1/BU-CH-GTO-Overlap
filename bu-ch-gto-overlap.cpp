@@ -72,6 +72,11 @@ int main ( int argc, char* argv[] )
   std::cout << "Please enter the basis set name: ";
   std::cin >> basis_name;
 
+  // Declare the atoms
+
+  BUEHT::Atom atom1(atomicnum1,x1,y1,z1);
+  BUEHT::Atom atom2(atomicnum2,x2,y2,z2);
+
   // Bring the name to uppercase
 
   BUEHT::StringToUpper(basis_name);
