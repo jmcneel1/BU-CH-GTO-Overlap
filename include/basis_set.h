@@ -90,6 +90,11 @@ class BasisSet : public BasisFunction
       return dimensions;
     }
 
+    int GetL ( const int & index ) const
+    {
+      return myBasisSet[index].GetL();
+    }
+
   private:
     std::vector<BUEHT::BasisFunction> myBasisSet;
 };
