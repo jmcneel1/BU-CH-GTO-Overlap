@@ -1,6 +1,8 @@
 #ifndef _bueht_util
 #define _bueht_util
 
+#include "bueht_parameters.h"
+
 /*
   James McNeely
 
@@ -13,6 +15,18 @@
 
 namespace BUEHT
 {
+
+  int CartesianExpansionLength (int l, int m)
+  {
+    int count = 0;
+    for ( unsigned int i = 0; 
+          i < *(&BUEHT::RealSphericalHarmonics + 1) - BUEHT::RealSphericalHarmonics;
+          i++ )
+    {
+      if ( BUEHT::RealSphericalHarmonics[i].l == l && BUEHT::RealSphericalHarmonics[i].m == m ) count++;
+    }
+    return count;
+  }
 
   int factorial ( int n )
   {

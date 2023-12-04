@@ -85,7 +85,7 @@ class BasisSet : public BasisFunction
       int dimensions(0);
       for ( unsigned int i = 0; i < myBasisSet.size(); i++ )
       {
-        dimensions += myBasisSet[i].GetL() * ( myBasisSet[i].GetL() + 1 );
+        dimensions += ( 2 * myBasisSet[i].GetL() + 1 );
       }
       return dimensions;
     }

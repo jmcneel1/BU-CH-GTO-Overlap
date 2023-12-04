@@ -100,8 +100,6 @@ int main ( int argc, char* argv[] )
     std::cout << basis_name << " not supported! Exiting..." << std::endl;
     std::exit(1);
   }
-
-  std::cout << basis_name << std::endl;
   
   // Read in the basis set.
   // The BasisSet class will perform all necessary checks.
@@ -109,7 +107,11 @@ int main ( int argc, char* argv[] )
   BUEHT::BasisSet basis1(basis_loc+basis_name+".bs",atomicnum1);
   BUEHT::BasisSet basis2(basis_loc+basis_name+".bs",atomicnum2);
 
+  double overlap_matrix[basis1.GetDimensions() * basis2.GetDimensions()];
+
   std::cout << basis1.GetDimensions() << "\n";
+
+  BUEHT::Overlap(atom1,atom2,basis1,basis2,overlap_matrix);
 
   /*
 

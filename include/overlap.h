@@ -14,7 +14,7 @@ namespace BUEHT
   void Overlap ( const BUEHT::Atom & atom1, const BUEHT::Atom & atom2,
                     const BUEHT::BasisSet & basis1,
                     const BUEHT::BasisSet & basis2,
-                    double* & overlap_matirx )
+                    double* overlap_matirx )
   {
     for( unsigned int i = 0; i < basis1.GetNumShells(); i++ )
     {
