@@ -16,11 +16,15 @@ namespace BUEHT
                     const BUEHT::BasisSet & basis2,
                     double* overlap_matirx )
   {
+    int num_cart1, num_cart2;
     for( unsigned int i = 0; i < basis1.GetNumShells(); i++ )
     {
       for ( unsigned int j = 0; j < basis2.GetNumShells(); j++ )
       {
-        std::cout << "Placeholder\n";
+        num_cart1 = BUEHT::CartesianExpansionLength(basis1.GetL(i),0);
+        num_cart2 = BUEHT::CartesianExpansionLength(basis2.GetL(j),0);
+        std::cout << "L1: " << num_cart1 << "\n";
+        std::cout << "L2: " << num_cart2 << "\n";
       }
     }
   }
