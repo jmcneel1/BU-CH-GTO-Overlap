@@ -19,12 +19,8 @@ namespace BUEHT
 
   int CartesianExpansionLength (int l, int m)
   {
-    int count = 0;
-    for ( unsigned int i = 0; i < bueht_cart_sph_harm_length; i++ )
-    {
-      if ( BUEHT::RealSphericalHarmonics[i].l == l && BUEHT::RealSphericalHarmonics[i].m == m ) count++;
-    }
-    return count;
+    int index = l*l + l - m;
+    return (BUEHT::RealSphericalHarmonicsPtr[index+1] - BUEHT::RealSphericalHarmonicsPtr[index]);
   }
 
   int factorial ( int n )
