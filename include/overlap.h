@@ -16,27 +16,44 @@ namespace BUEHT
                     const BUEHT::BasisSet & basis2,
                     double* overlap_matirx )
   {
-    int num_cart1, num_cart2, min_m1, max_m1, min_m2, max_m2;
+    int index = 0;
+    int num_cart1, num_cart2;
     double sum = 0.0;
     for( unsigned int i = 0; i < basis1.GetNumShells(); i++ )
     {
       for ( unsigned int j = 0; j < basis2.GetNumShells(); j++ )
       {
-        min_m1 = -1 * ( 2 * basis1.GetL(i) + 1 );
-        min_m2 = -1 * ( 2 * basis2.GetL(j) + 1 );
-        max_m1 = ( 2 * basis1.GetL(i) + 1 );
-        max_m2 = ( 2 * basis2.GetL(j) + 1 );
-        for ( unsigned int k = min_m1; k <= max_m1; k++ )
+        for ( int k = -1*basis1.GetL(i); k <= basis1.GetL(i); k++ )
         {
-          for ( unsigned int l = min_m2; l <= max_m2; l++ )
+          for ( int l = -1*basis2.GetL(j); l <= basis2.GetL(j); l++ )
           {
             sum = 0.0;
+            for ( unsigned int m = 0; 
+                  m < BUEHT::CartesianExpansionLength(basis1.GetL(i),k); m++ )
+            {
+              for ( unsigned int n = 0; 
+                    n < BUEHT::CartesianExpansionLength(basis2.GetL(j),l); n++ )
+              {
+                sum += (BUEHT::RealSphericalHarmonics
+                        [
+                          BUEHT::RealSphericalHarmonicsPtr
+                          [
+                            basis1.GetL(i) * ( basis1.GetL(i) + 1 ) - k
+                          ] + m 
+                        ].factor *
+                        BUEHT::RealSphericalHarmonics
+                        [
+                          BUEHT::RealSphericalHarmonicsPtr
+                          [
+                            basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
+                          ] + n 
+                        ].factor *
+                       );
+              }
+            }
+            std::cout << sum << "\n";
           }
         }
-        num_cart1 = BUEHT::CartesianExpansionLength(basis1.GetL(i),0);
-        num_cart2 = BUEHT::CartesianExpansionLength(basis2.GetL(j),0);
-        std::cout << "L1: " << num_cart1 << "\n";
-        std::cout << "L2: " << num_cart2 << "\n";
       }
     }
   }
