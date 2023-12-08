@@ -95,6 +95,16 @@ class BasisSet : public BasisFunction
       return myBasisSet[index].GetL();
     }
 
+    std::vector<double> GetCoefficients ( int index ) const
+    {
+      return myBasisSet[index].GetCoefficients();
+    }
+
+    std::vector<double> GetExponents ( int index ) const
+    {
+      return myBasisSet[index].GetExponents();
+    } 
+
   private:
     std::vector<BUEHT::BasisFunction> myBasisSet;
 };

@@ -11,6 +11,29 @@
 
 namespace BUEHT
 {
+
+  double Overlap_PRIM ( const double & exp1, const double & exp2, int i1, int j1, int k1,
+                        int i2, int j2, int k2 )
+  {
+    return 1.0;
+  }
+
+  double Overlap_BF (const std::vector<double> & coefs1, const std::vector<double> & coefs2,
+                     const std::vector<double> & exps1, const std::vector<double> & exps2,
+                     int i1, int j1, int k1, int i2, int j2, int k2)
+  {
+    double sum = 0.0;
+    for ( unsigned int m = 0; m < coefs1.size(); m++ )
+    {
+      for ( unsigned int n = 0; n < coefs2.size(); n++ )
+      {
+        sum += coefs1[m]*coefs2[n]*
+               Overlap_PRIM(exps1[m],exps2[n],i1,j1,k1,i2,j2,k2);
+      }
+    }
+    return 1.0;
+  }
+
   void Overlap ( const BUEHT::Atom & atom1, const BUEHT::Atom & atom2,
                     const BUEHT::BasisSet & basis1,
                     const BUEHT::BasisSet & basis2,
@@ -48,6 +71,50 @@ namespace BUEHT
                             basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
                           ] + n 
                         ].factor *
+                        BUEHT::Overlap_BF (basis1.GetCoefficients(i), basis2.GetCoefficients(j),
+                                           basis1.GetExponents(i),basis2.GetExponents(j),
+                                           BUEHT::RealSphericalHarmonics
+                                           [
+                                             BUEHT::RealSphericalHarmonicsPtr
+                                             [
+                                               basis1.GetL(i) * ( basis1.GetL(i) + 1 ) - k
+                                             ] + m
+                                           ].x,
+                                           BUEHT::RealSphericalHarmonics
+                                           [
+                                             BUEHT::RealSphericalHarmonicsPtr
+                                             [
+                                               basis1.GetL(i) * ( basis1.GetL(i) + 1 ) - k
+                                             ] + m
+                                           ].y,
+                                           BUEHT::RealSphericalHarmonics
+                                           [
+                                             BUEHT::RealSphericalHarmonicsPtr
+                                             [
+                                               basis1.GetL(i) * ( basis1.GetL(i) + 1 ) - k
+                                             ] + m
+                                           ].z,
+                                           BUEHT::RealSphericalHarmonics
+                                           [
+                                             BUEHT::RealSphericalHarmonicsPtr
+                                             [
+                                               basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
+                                             ] + n
+                                           ].x,
+                                           BUEHT::RealSphericalHarmonics
+                                           [
+                                             BUEHT::RealSphericalHarmonicsPtr
+                                             [
+                                               basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
+                                             ] + n
+                                           ].y,
+                                           BUEHT::RealSphericalHarmonics
+                                           [
+                                             BUEHT::RealSphericalHarmonicsPtr
+                                             [
+                                               basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
+                                             ] + n
+                                           ].z)
                        );
               }
             }
