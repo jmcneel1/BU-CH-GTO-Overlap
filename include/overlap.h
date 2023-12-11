@@ -12,30 +12,35 @@
 namespace BUEHT
 {
 
-  double Overlap_PRIM ( const double & exp1, const double & exp2, int i1, int j1, int k1,
-                        int i2, int j2, int k2 )
+  double Overlap_PRIM ( const double & mu, const double & p, 
+                        const double & dx, const double & dy, const double & dz,
+                        int i1, int j1, int k1, int i2, int j2, int k2 )
   {
     return 1.0;
   }
 
   double Overlap_BF (const BUEHT::Atom & atom1, const BUEHT::Atom & atom2,
                      const double & dx, const double & dy, const double & dz,
-                     const std::vector<double> & coefs1, const std::vector<double> & coefs2,
-                     const std::vector<double> & exps1, const std::vector<double> & exps2,
+                     const BUEHT::BasisFunction & bf1,
+                     const BUEHT::BasisFunction & bf2,
                      int i1, int j1, int k1, int i2, int j2, int k2)
   {
     double sum = 0.0;
-    for ( unsigned int m = 0; m < coefs1.size(); m++ )
+    std::vector<double> exps1 = bf1.GetExponents();
+    std::vector<double> exps2 = bf2.GetExponents();
+    std::vector<double> coefs1 = bf1.GetCoefficients();
+    std::vector<double> coefs2 = bf2.GetCoefficients();
+    for ( unsigned int m = 0; m < bf1.GetNumPrimitives(); m++ )
     {
-      for ( unsigned int n = 0; n < coefs2.size(); n++ )
+      for ( unsigned int n = 0; n < bf2.GetNumPrimitives(); n++ )
       {
         double mu = exps1[m] * exps2[n] / ( exps1[m] + exps2[n] );
         double p = exps1[m] + exps2[n];
         double xp = ( exps1[m] * atom1.GetX() + exps2[n] * atom2.GetX() ) / p;
         double yp = ( exps1[m] * atom1.GetY() + exps2[n] * atom2.GetY() ) / p;
         double zp = ( exps1[m] * atom1.GetZ() + exps2[n] * atom2.GetZ() ) / p;
-        sum += coefs1[m]*coefs2[n];//*
-             //  Overlap_PRIM(mu,p,dx,dy,dz,i1,j1,k1,i2,j2,k2);
+        sum += coefs1[m]*coefs2[n]*bf1.GetNorm(m)*bf2.GetNorm(n)*
+               Overlap_PRIM(mu,p,dx,dy,dz,i1,j1,k1,i2,j2,k2);
       }
     }
     return 1.0;
@@ -82,8 +87,8 @@ namespace BUEHT
                           ] + n 
                         ].factor *
                         BUEHT::Overlap_BF (atom1, atom2, dx, dy, dz,
-                                           basis1.GetCoefficients(i), basis2.GetCoefficients(j),
-                                           basis1.GetExponents(i),basis2.GetExponents(j),
+                                           basis1.GetBasisFunction(i),
+                                           basis2.GetBasisFunction(j),
                                            BUEHT::RealSphericalHarmonics
                                            [
                                              BUEHT::RealSphericalHarmonicsPtr

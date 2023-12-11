@@ -110,6 +110,11 @@ class BasisSet : public BasisFunction
       return myBasisSet[index].GetNorms();
     }
 
+    BUEHT::BasisFunction GetBasisFunction ( int index ) const
+    {
+      return myBasisSet[index];
+    }
+
   private:
     std::vector<BUEHT::BasisFunction> myBasisSet;
 };
