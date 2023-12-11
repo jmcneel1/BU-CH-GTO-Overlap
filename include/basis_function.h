@@ -47,11 +47,19 @@ class BasisFunction
                    const std::vector<double> & zeta )
     {
       myL = l;
+      myNorms.resize(coeffs.size());
       if ( (num_primitive == coeffs.size()) && (num_primitive == zeta.size()) )
       {
         this->myNumPrimitives = num_primitive;
         this->myZetas = zeta;
         this->myCoefficients = coeffs;
+        for ( unsigned int i = 0; i < coeffs.size(); i++ )
+        {
+          myNorms[i] = std::pow(bueht_pi,-0.25)*
+                       std::pow(2.e0,1.75+(double)l)*
+                       std::pow(BUEHT::DoubleFactorial(2*l+1),-0.5)*
+                       std::pow(myZetas[i],0.75+(double)l);
+        }
       }
       else
       {
@@ -140,6 +148,21 @@ class BasisFunction
 
     unsigned int GetNumPrimitives () const { return myNumPrimitives; }
 
+    double GetNorm ( const int & index ) const 
+    { 
+      if  ( (index >= 0) && (index < myNumPrimitives) )
+      {
+        return myNorms[index];
+      }
+      else
+      {
+        std::cout << "Invalid index for AO Norm vector! Exiting...\n";
+        std::exit(1);
+      }
+    }
+
+    std::vector<double> GetNorms () const { return myNorms; }
+
     bool IsGood ( const std::string & basis_name, const int & atomic_num )
     {
       std::string fname = basis_name + ".bs";
@@ -180,12 +203,7 @@ class BasisFunction
     unsigned int myNumPrimitives;
     std::vector<double> myCoefficients;
     std::vector<double> myZetas;
-
-    bool IsNormalized () const
-    {
-      //std::vector<int>
-      return true;
-    };
+    std::vector<double> myNorms;
 
 };
 

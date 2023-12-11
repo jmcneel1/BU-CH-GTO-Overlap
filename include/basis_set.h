@@ -105,6 +105,11 @@ class BasisSet : public BasisFunction
       return myBasisSet[index].GetExponents();
     } 
 
+    std::vector<double> GetNorms ( int index ) const
+    {
+      return myBasisSet[index].GetNorms();
+    }
+
   private:
     std::vector<BUEHT::BasisFunction> myBasisSet;
 };

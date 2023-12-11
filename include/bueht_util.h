@@ -70,6 +70,20 @@ namespace BUEHT
 
     return path+"share/";
   }
+
+   int DoubleFactorial ( const int & arg )
+   {
+    unsigned int total = 1;
+    if ( (arg%2) == 0 )
+    {
+      for ( unsigned int i = 1; i <= arg/2; i++ ) total*=(2*i);
+    }
+    else
+    {
+      for ( unsigned int i = 1; i <= (arg+1)/2; i++ ) total*=(2*i-1);
+    }
+    return total;
+   }
   
 }
 

@@ -18,7 +18,9 @@ namespace BUEHT
     return 1.0;
   }
 
-  double Overlap_BF (const std::vector<double> & coefs1, const std::vector<double> & coefs2,
+  double Overlap_BF (const BUEHT::Atom & atom1, const BUEHT::Atom & atom2,
+                     const double & dx, const double & dy, const double & dz,
+                     const std::vector<double> & coefs1, const std::vector<double> & coefs2,
                      const std::vector<double> & exps1, const std::vector<double> & exps2,
                      int i1, int j1, int k1, int i2, int j2, int k2)
   {
@@ -27,8 +29,13 @@ namespace BUEHT
     {
       for ( unsigned int n = 0; n < coefs2.size(); n++ )
       {
-        sum += coefs1[m]*coefs2[n]*
-               Overlap_PRIM(exps1[m],exps2[n],i1,j1,k1,i2,j2,k2);
+        double mu = exps1[m] * exps2[n] / ( exps1[m] + exps2[n] );
+        double p = exps1[m] + exps2[n];
+        double xp = ( exps1[m] * atom1.GetX() + exps2[n] * atom2.GetX() ) / p;
+        double yp = ( exps1[m] * atom1.GetY() + exps2[n] * atom2.GetY() ) / p;
+        double zp = ( exps1[m] * atom1.GetZ() + exps2[n] * atom2.GetZ() ) / p;
+        sum += coefs1[m]*coefs2[n];//*
+             //  Overlap_PRIM(mu,p,dx,dy,dz,i1,j1,k1,i2,j2,k2);
       }
     }
     return 1.0;
@@ -42,6 +49,9 @@ namespace BUEHT
     int index = 0;
     int num_cart1, num_cart2;
     double sum = 0.0;
+    double dx(atom2.GetX()-atom1.GetX());
+    double dy(atom2.GetY()-atom1.GetY());
+    double dz(atom2.GetZ()-atom1.GetZ());
     for( unsigned int i = 0; i < basis1.GetNumShells(); i++ )
     {
       for ( unsigned int j = 0; j < basis2.GetNumShells(); j++ )
@@ -71,7 +81,8 @@ namespace BUEHT
                             basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
                           ] + n 
                         ].factor *
-                        BUEHT::Overlap_BF (basis1.GetCoefficients(i), basis2.GetCoefficients(j),
+                        BUEHT::Overlap_BF (atom1, atom2, dx, dy, dz,
+                                           basis1.GetCoefficients(i), basis2.GetCoefficients(j),
                                            basis1.GetExponents(i),basis2.GetExponents(j),
                                            BUEHT::RealSphericalHarmonics
                                            [
