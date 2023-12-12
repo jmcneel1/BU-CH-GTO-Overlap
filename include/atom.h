@@ -89,6 +89,27 @@ class Atom
     }
 
     /*
+      This constructor provides an object fully capable of being used
+      to calculate the overlap integral. The final argument specifies whether
+      Angstrom or Bohr used...
+    */
+
+    Atom( int anum, double x, double y, double z, char unit) : myX{x},
+                                                    myY{y},
+                                                    myZ{z}
+    {
+      Atom tmp(anum);
+      this->myAtomicNumber = tmp.myAtomicNumber;
+      this->myAtomicMass = tmp.myAtomicMass;
+      if ( unit == 'A' )
+      {
+        myX /= bueht_bohr_to_angstroem;
+        myY /= bueht_bohr_to_angstroem;
+        myZ /= bueht_bohr_to_angstroem;
+      }
+    }
+
+    /*
       The following is useful for printing
     */
 

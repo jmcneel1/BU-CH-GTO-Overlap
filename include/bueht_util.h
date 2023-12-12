@@ -20,7 +20,7 @@ namespace BUEHT
   int CartesianExpansionLength (int l, int m)
   {
     int index = l*l + l - m;
-    return (BUEHT::RealSphericalHarmonicsPtr[index+1] - BUEHT::RealSphericalHarmonicsPtr[index]);
+    return BUEHT::RealSphericalHarmonics[BUEHT::RealSphericalHarmonicsPtr[index]].length;
   }
 
   int factorial ( int n )

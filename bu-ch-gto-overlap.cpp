@@ -74,8 +74,8 @@ int main ( int argc, char* argv[] )
 
   // Declare the atoms
 
-  BUEHT::Atom atom1(atomicnum1,x1,y1,z1);
-  BUEHT::Atom atom2(atomicnum2,x2,y2,z2);
+  BUEHT::Atom atom1(atomicnum1,x1,y1,z1,'A');
+  BUEHT::Atom atom2(atomicnum2,x2,y2,z2,'A');
 
   // Bring the name to uppercase
 
@@ -108,8 +108,6 @@ int main ( int argc, char* argv[] )
   BUEHT::BasisSet basis2(basis_loc+basis_name+".bs",atomicnum2);
 
   double overlap_matrix[basis1.GetDimensions() * basis2.GetDimensions()];
-
-  std::cout << basis1.GetDimensions() << "\n";
 
   BUEHT::Overlap(atom1,atom2,basis1,basis2,overlap_matrix);
 
