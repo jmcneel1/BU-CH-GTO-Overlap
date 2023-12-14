@@ -68,46 +68,6 @@ class BasisFunction
       }
     }
 
-    BasisFunction ( const int & n, const int & l, const int & atomic_num,
-                    const int & shell_number, const std::string & basis_name ) 
-    {
-      bool found = false;
-      int count = 0;
-     /* while ( ! found )
-      {
-        if ( (*(bueht_param_ptr[atomic_num-1]+count)).an == atomic_num )
-        {
-          if ( ((*(bueht_param_ptr[atomic_num-1]+count)).n == n) &&
-               ((*(bueht_param_ptr[atomic_num-1]+count)).l == l) )
-          {
-            myN = n;
-            myL = l;
-            if ( std::abs((*(bueht_param_ptr[atomic_num-1]+count)).c2) < 1e-8 )
-            {
-              myNumPrimitives = 1;
-              myZetas.push_back((*(bueht_param_ptr[atomic_num-1]+count)).z1);
-              myCoefficients.push_back((*(bueht_param_ptr[atomic_num-1]+count)).c1);
-            }
-            else
-            {
-              myNumPrimitives = 2;
-              myZetas.push_back((*(bueht_param_ptr[atomic_num-1]+count)).z1);
-              myZetas.push_back((*(bueht_param_ptr[atomic_num-1]+count)).z2);
-              myCoefficients.push_back((*(bueht_param_ptr[atomic_num-1]+count)).c1);
-              myCoefficients.push_back((*(bueht_param_ptr[atomic_num-1]+count)).c2);
-            }
-            found = true;
-          }
-        }
-        else
-        {
-          std::cout << "Unknown N/L for Atomic Number " << atomic_num << ". Exiting...\n";
-          std::exit(1);
-        }
-        count++;
-      }*/
-    }
-
     double GetExponent ( const int & index ) const
     {
       if  ( (index >= 0) && (index < myNumPrimitives) )

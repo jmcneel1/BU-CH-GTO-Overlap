@@ -99,19 +99,20 @@ namespace BUEHT
   void Overlap ( const BUEHT::Atom & atom1, const BUEHT::Atom & atom2,
                     const BUEHT::BasisSet & basis1,
                     const BUEHT::BasisSet & basis2,
-                    double* overlap_matirx )
+                    double* overlap_matrix )
   {
+    int index = 0;
     double sum = 0.0;
     double dx(atom2.GetX()-atom1.GetX());
     double dy(atom2.GetY()-atom1.GetY());
     double dz(atom2.GetZ()-atom1.GetZ());
     for( unsigned int i = 0; i < basis1.GetNumShells(); i++ )
     {
-      for ( unsigned int j = 0; j < basis2.GetNumShells(); j++ )
+      for ( int k = -1*basis1.GetL(i); k <= basis1.GetL(i); k++ )
       {
-        for ( int k = -1*basis1.GetL(i); k <= basis1.GetL(i); k++ )
+        for ( unsigned int j = 0; j < basis2.GetNumShells(); j++ )
         {
-          for ( int l = -1*basis2.GetL(j); l <= basis2.GetL(j); l++ )
+          for ( int l = -1*basis2.GetL(j); l <= basis2.GetL(j); l++ ) // -m .. m
           {
             sum = 0.0;
             for ( unsigned int m = 0; 
@@ -182,8 +183,8 @@ namespace BUEHT
                        );
               }
             }
-            std::cout << "IJKL " << i << j << k << l << "\n";
-            std::cout << sum << "\n";
+            overlap_matrix[index] = sum;
+            index++;
           }
         }
       }

@@ -95,6 +95,18 @@ class BasisSet : public BasisFunction
       return myBasisSet[index].GetL();
     }
 
+    char GetL_Char ( const int & index ) const
+    {
+      int l = myBasisSet[index].GetL();
+      if ( l == 0 ) return 'S';
+      else if ( l == 1 ) return 'P';
+      else if ( l == 2 ) return 'D';
+      else if ( l == 3 ) return 'F';
+      else if ( l == 4 ) return 'G';
+      else if ( l == 5 ) return 'H';
+      else return 'I';
+    }
+
     std::vector<double> GetCoefficients ( int index ) const
     {
       return myBasisSet[index].GetCoefficients();
