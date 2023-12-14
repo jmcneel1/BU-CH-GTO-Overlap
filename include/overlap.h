@@ -108,7 +108,7 @@ namespace BUEHT
     double dz(atom2.GetZ()-atom1.GetZ());
     for( unsigned int i = 0; i < basis1.GetNumShells(); i++ )
     {
-      for ( int k = -1*basis1.GetL(i); k <= basis1.GetL(i); k++ )
+      for ( int k = -1*basis1.GetL(i); k <= basis1.GetL(i); k++ ) // -m .. m
       {
         for ( unsigned int j = 0; j < basis2.GetNumShells(); j++ )
         {
