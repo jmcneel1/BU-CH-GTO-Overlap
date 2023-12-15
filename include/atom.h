@@ -48,7 +48,7 @@ class Atom
     
     Atom( int anum )                     
     {
-      if ( anum >= 0 && anum < (NUM_ELEMENTS+1) )
+      if ( anum > 0 && anum < (NUM_ELEMENTS+1) )
       {
         myAtomicNumber = anum;
         myAtomicMass = bueht_atomic_masses[anum-1];
@@ -61,8 +61,8 @@ class Atom
     }
 
     /*
-      This constructor provides an object fully capable of being used
-      to calculate the overlap integral
+      This constructor takes the atomic number (anum) and a vector
+      of coordinates
     */
   
     Atom( int anum, const std::vector<double> & coords ) : myX{coords[0]},
@@ -75,8 +75,8 @@ class Atom
     }
   
     /*
-      This constructor provides an object fully capable of being used
-      to calculate the overlap integral
+      This constructor provides takes three doubles
+      rather than a vector as above.
     */
 
     Atom( int anum, double x, double y, double z) : myX{x},
@@ -89,9 +89,10 @@ class Atom
     }
 
     /*
-      This constructor provides an object fully capable of being used
-      to calculate the overlap integral. The final argument specifies whether
-      Angstrom or Bohr used...
+      The final argument specifies whether
+      Angstrom or Bohr was used... the coordinates are
+      always stored as Bohr. Must be 'A' or 'B'. If not 'A',
+      it is assumed to be 'B'.
     */
 
     Atom( int anum, double x, double y, double z, char unit) : myX{x},
@@ -150,15 +151,6 @@ class Atom
     double GetAtomicMass () const
     {
       return myAtomicMass;
-    }
-
-    /*
-      This is not functional in the current tool.
-    */
-
-    double GetMulliken () const
-    {
-      return myMulliken;
     }
 
     Atom & operator = ( const Atom & old_atom ) = default;
@@ -276,11 +268,6 @@ class Atom
       }
     }
 
-    void SetMulliken ( double mull_charge )
-    {
-      myMulliken = mull_charge;
-    }
-
     ~Atom() = default;
 
   private:
@@ -289,7 +276,6 @@ class Atom
     double myY;
     double myZ;
     double myAtomicMass;
-    double myMulliken;
     int myAtomicNumber;
 };
 

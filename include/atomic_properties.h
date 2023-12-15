@@ -15,44 +15,8 @@
 namespace BUEHT
 {
 
-int bueht_core_electrons [] = {
-  0,  // H
-  0,  // He
-  2,  // Li 1s
-  2,  // Be 1s
-  2,  // B  1s
-  2,  // C  1s
-  2,  // N  1s
-  2,  // O  1s
-  2,  // F  1s
-  2,  // Ne 1s
-  10, // Na 1s2s2p
-  10, // Mg 1s2s2p
-  10, // Al 1s2s2p
-  10, // Si 1s2s2p
-  10, // P  1s2s2p
-  10, // S  1s2s2p
-  10, // Cl 1s2s2p
-  10, // Ar 1s2s2p
-  18, // K  1s2s2p3s3p
-  18, // Ca 1s2s2p3s3p
-  18, // Sc 1s2s2p3s3p
-  18, // Ti 1s2s2p3s3p
-  18, // V  1s2s2p3s3p
-  18, // Cr 1s2s2p3s3p
-  18, // Mn 1s2s2p3s3p
-  18, // Fe 1s2s2p3s3p
-  18, // Co 1s2s2p3s3p
-  18, // Ni 1s2s2p3s3p
-  18, // Cu 1s2s2p3s3p
-  18, // Zn 1s2s2p3s3p
-  28, // Ga 1s2s2p3s3p3d
-  28, // Ge 1s2s2p3s3p3d
-  28, // As 1s2s2p3s3p3d
-  28, // Se 1s2s2p3s3p3d
-  28, // Br 1s2s2p3s3p3d
-  28  // Kr 1s2s2p3s3p3d
-};
+// Masses taken from IUPAC (2021)
+// https://iupac.qmul.ac.uk/AtWt/
 
 float bueht_atomic_masses [] = {
   1.008, // H
@@ -67,30 +31,111 @@ float bueht_atomic_masses [] = {
   20.1797, // Ne
   22.98976928, // Na
   24.305, // Mg
-  26.9815385, // Al
+  26.9815384, // Al
   28.085, // Si
-  30.973761998, // P
+  30.973762, // P
   32.06, // S
   35.45, // Cl
-  39.948, // Ar
+  39.95, // Ar
   39.0983, // K
   40.078, // Ca
-  44.955908, // Sc
+  44.955907, // Sc
   47.867, // Ti
   50.9415, // V
-  51.9961, // Cr
-  54.938044, //Mn
+  51.996, // Cr
+  54.938043, //Mn
   55.845, // Fe
   58.933194, // Co
   58.6934, // Ni
   63.546, // Cu
   65.38, // Zn
   69.723, // Ga
-  72.630, // Ge
-  74.921595, // As
-  78.971, // Se
+  72.63, // Ge
+  74.92160, // As
+  78.97, // Se
   79.904, // Br
-  83.798 // Kr
+  83.798, // Kr
+  85.4678, // Rb
+  87.62, // Sr
+  88.905838, // Y
+  91.224, // Zr
+  92.90637, // Mo
+  97., // Tc
+  101.07, // Ru
+  102.90549, // Rh
+  106.42, // Pd
+  107.8682, // Ag
+  112.414, // Cd
+  114.818, // In
+  118.71, // Sn
+  121.760, // Sb
+  127.60, // Te
+  126.90447, // I
+  131.29, // Xe
+  132.905452, // Cs
+  137.33, // Ba
+  138.9055, // La
+  140.116, // Ce
+  140.90766, // Pr
+  144.242, // Nd
+  145., // Pm
+  150.36, // Sm
+  151.964, // Eu
+  157.25, // Gd
+  158.92535, // Tb
+  162.500, // Dy
+  164.93033, // Ho
+  167.259, // Er
+  168.93422, // Tm
+  173.045, // Yb
+  174.9668, // Lu
+  178.49, // Hf
+  180.94788, // Ta
+  183.84, // W
+  186.207, // Re
+  190.23, // Os
+  192.217, // Ir
+  195.08, // Pt
+  196.96657, // Au
+  200.592, // Hg
+  204.38, // Th
+  207.2, // Pb
+  208.98040, // Bi
+  209., // Po
+  210., // At
+  222., // Rn
+  223., // Fr
+  226., // Ra
+  227., // Ac
+  232.0377, // Th
+  231.03588, // Ta
+  238.02891, // U
+  237., // Np
+  244., // Pu
+  243., // Am
+  247., // Cm
+  247., // Bk
+  251., // Cf
+  252., // Es
+  257., // Fm
+  258., // Md
+  259., // No
+  262., // Lr
+  267., // Rf
+  270., // Db
+  269., // Sg
+  270., // Bh
+  270., // Hs
+  278., // Mt
+  281., // Ds
+  281., // Rg
+  285., // Cn
+  286., // Nh
+  289., // Fl
+  289., // Mc
+  293., // Lv
+  293., // Ts
+  294. // Og
 };
 
 std::string bueht_atomic_symbols[] = {
@@ -129,7 +174,89 @@ std::string bueht_atomic_symbols[] = {
       "As",
       "Se",
       "Br",
-      "Kr"
+      "Kr",
+      "Rb",
+      "Sr",
+      "Y",
+      "Zr",
+      "Nb",
+      "Mo",
+      "Tc",
+      "Ru",
+      "Rh",
+      "Pd",
+      "Ag",
+      "Cd",
+      "In",
+      "Sn",
+      "Sb",
+      "Te",
+      "I",
+      "Xe",
+      "Cs",
+      "Ba",
+      "La",
+      "Ce",
+      "Pr",
+      "Nd",
+      "Pm",
+      "Sm",
+      "Eu",
+      "Gd",
+      "Tb",
+      "Dy",
+      "Ho",
+      "Er",
+      "Tm",
+      "Yb",
+      "Lu",
+      "Hf",
+      "Ta",
+      "W",
+      "Re",
+      "Os",
+      "Ir",
+      "Pt",
+      "Au",
+      "Hg",
+      "Tl",
+      "Pb",
+      "Bi",
+      "Po",
+      "At",
+      "Rn",
+      "Fr",
+      "Ra",
+      "Ac",
+      "Th",
+      "Pa",
+      "U",
+      "Np",
+      "Pu",
+      "Am",
+      "Cm",
+      "Bk",
+      "Cf",
+      "Es"
+      "Fm",
+      "Md",
+      "No",
+      "Lr",
+      "Rf",
+      "Db",
+      "Sg",
+      "Bh",
+      "Hs",
+      "Mt",
+      "Ds",
+      "Rg",
+      "Cn",
+      "Nh",
+      "Fl",
+      "Mc",
+      "Lv",
+      "Ts",
+      "Og"
     };
 
     std::string bueht_atomic_names[] = {
@@ -206,7 +333,51 @@ std::string bueht_atomic_symbols[] = {
       "LUTETIUM", // 71
       "HAFNIUM", // 72
       "TANTALUM", // 73
-      "TUNGSTEN" // 74
+      "TUNGSTEN", // 74
+      "RHENIUM", // 75
+      "OSMIUM", // 76
+      "IRIDIUM", // 77
+      "PLATINUM", // 78
+      "GOLD", // 79
+      "MERCURY", // 80
+      "THALLIUM", // 81
+      "LEAD", // 82
+      "BISMUTH", // 83
+      "POLONIUM", // 84
+      "ASTATINE", // 85
+      "RADON", // 86
+      "FRANCIUM", // 87
+      "RADIUM", // 88
+      "ACTINIUM", // 89
+      "THORIUM", // 90
+      "PROTACTINIUM", // 91
+      "URANIUM", // 92
+      "NEPTUNIUM", // 93
+      "PLUTONIUM", // 94
+      "AMERICIUM", // 95
+      "CURIUM", // 96
+      "BERKELIUM", // 97
+      "CALIFORNIUM", // 98
+      "EINSTEINIUM", // 99
+      "FERMIUM", // 100
+      "MENDELEVIUM", // 101
+      "NOBELIUM", // 102
+      "LAWRENCIUM", // 103
+      "RUTHERFORDIUM", // 104
+      "DUBNIUM", // 105
+      "SEABORGIUM", // 106
+      "BOHRIUM", // 107
+      "HASSIUM", // 108
+      "MEITNERIUM", // 109
+      "DARMSTADTIUM", // 110
+      "ROENTGENIUM", // 111
+      "COPERNICIUM", // 112
+      "NIHONIUM", // 113
+      "FLEROVIUM", // 114
+      "MOSCOVIUM", // 115
+      "LIVERMORIUM", // 116
+      "TENNESSINE", // 117
+      "OGANESSON" // 118
     };
 
 } // End of namespace BUEHT
