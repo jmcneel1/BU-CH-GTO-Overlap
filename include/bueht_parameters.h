@@ -17,7 +17,7 @@ namespace BUEHT
 */
 
 /*
-  A paramater object is a "row" of the parameters
+  A parameter object is a "row" of the parameters
   listed below
 */
 
