@@ -48,7 +48,7 @@ struct RealSphericalHarmonic
 /*
   Here we store pointers to the location in RealSphericalHarmonics
   that allows us to easily loop through the Cartesian expansion
-  of the Spherical Basis FUnctions in the main program.
+  of the Spherical Basis Functions in the main program.
 */
 
 int RealSphericalHarmonicsPtr [] =
