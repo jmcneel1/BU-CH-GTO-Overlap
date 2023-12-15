@@ -6,11 +6,33 @@
 #include "atom.h"
 
 /*
+
   James McNeely
+
+  This header contains the necessary functions to calculate 
+  the overlap integrals between a pair of atoms. All BFs centered
+  on the give atoms are calculated.
+
+  We have that X = sum(i=1..NP, ci*xi) where xi are spherical GTOs
+
+  Each spherical GTO is then expanded in its Cartesian coordinates with the 
+  bueht_parameters object RealSphericalHarmonics.
+
+  The primitive normalization constants are stored in the BF itself.
+
+  We thus have that 
+
+  S12 = int[sum(i=1..NP){ci*xi}*sum(j=1..NP){cj*xj}]
+      = int[sum(i=1..NP){ci*sum(k=1..NC1){ck*x^m1y^n1z^o1*Exp[-zeta1*r^2]}}*
+            sum(j=1..NP){cj*sum(l=1..NC2){cl*x^m2y^n2z^o2*Exp[-zeta2*r^2]}}]
+
 */
 
 namespace BUEHT
 {
+
+  /*
+  */
 
   double Overlap_Recursion ( const double & s00, const double & p, 
                              const int & i, const int & j, 
