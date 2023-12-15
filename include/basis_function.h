@@ -16,18 +16,10 @@
 
   Private Variables include:
 
-  1. The principle quantum number (myN)
   2. The angular momentum qN (myL)
-  3. The contraction coefficients. These are for a normalized BF. 
-     (c1^2<P1|P1>+c2^2<P2|P2>+2c1c2<P1P2> = 1)
-     For example, for Cr(III) 3D shell
-     <X|X> = c1^2<P1|P1> + c2^2<P2|P2> + 2c1c2<P1|P2>
-           = 0.5060^2 * 1 + 0.675^2 * 1 + 2 * 0.5060 * 0.675 * 
-             (2*z1)^(3.5)*(2*z2)^(3.5)/(2*n)! * 
-             Int(r2*r^(n-1)*r^(n-1)*exp(-(z1+z2)*r),dr) 
-           = 0.5060^2 * 1 + 0.675^2 * 1 + 2 * 0.5060 * 0.675 * 
-             (2*z1)^(3.5)*(2*z2)^(3.5)/(2*n)! * 
-             (2*n)!/(z1+z2)^(2n+1) = 1
+  3. The contraction coefficients. These are for a normalized spherical BFs. 
+     ie... c1^2 <x1|x1> + c2^2 <x2|x2> + c3^2 <x3|x3> + 2c1c3<x1|x3> +
+           2c1c2 <x2|x1> + 2c2c3 <x3|x2> = 1 for three primitives...
   4. The Zetas for each primitive
   5. The number of primitives.
 
@@ -48,6 +40,7 @@ class BasisFunction
     {
       myL = l;
       myNorms.resize(coeffs.size());
+      // First check to make sure that the arguments have the correct structure
       if ( (num_primitive == coeffs.size()) && (num_primitive == zeta.size()) )
       {
         this->myNumPrimitives = num_primitive;
@@ -55,6 +48,7 @@ class BasisFunction
         this->myCoefficients = coeffs;
         for ( unsigned int i = 0; i < coeffs.size(); i++ )
         {
+          // N = (2*(2*zeta)^(3/4)/pi^(1/4))*sqrt(2^l/(2l+1)!!)*sqrt(2*zeta)^l
           myNorms[i] = std::pow(bueht_pi,-0.25)*
                        std::pow(2.e0,1.75+(double)l)*
                        std::pow(BUEHT::DoubleFactorial(2*l+1),-0.5)*
@@ -123,19 +117,13 @@ class BasisFunction
 
     std::vector<double> GetNorms () const { return myNorms; }
 
-    bool IsGood ( const std::string & basis_name, const int & atomic_num )
-    {
-      std::string fname = basis_name + ".bs";
-      std::ifstream inFile(fname.c_str());
-      if ( inFile.good() )
-      {
-        std::cout << "LALA\n";
-      }
-      else
-      {
-        return false;
-      }
-    }
+
+    /*
+      This overload is currently not used, but will be worked on in the 
+      future, so it is kept for the time being.
+
+      James McNeely - 12/15/23
+    */
 
     friend std::ostream & operator << ( std::ostream & buffer, 
                                    const BUEHT::BasisFunction & basis_function )
