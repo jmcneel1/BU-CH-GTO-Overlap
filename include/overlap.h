@@ -26,12 +26,30 @@
       = int[sum(i=1..NP){ci*sum(k=1..NC1){ck*x^m1y^n1z^o1*Exp[-zeta1*r^2]}}*
             sum(j=1..NP){cj*sum(l=1..NC2){cl*x^m2y^n2z^o2*Exp[-zeta2*r^2]}}]
 
+  S12 is then separable into cartesian components, and the resulting integral
+  is a product of three one-dimensional integrals...
+
+  These integrals are solved recursively with the following relations:
+
+  1) S00(x) = sqrt(pi/(zeta1+zeta1))*Exp(-(zeta1*zeta2)/(zeta1+zeta2)*(x2-x1)^2)
+  2) Sij(x) = ((zeta1*x1+zeta2*x2)/(zeta1+zeta2)-x1) *Si-1j  + 
+              1/(2*(zeta1+zeta2)) * ((i-1)*Si-2j + jSi-1j-1)
+  3) Sij(x) = ((zeta1*x1+zeta2*x2)/(zeta1+zeta2)-x2) *Sij-1  + 
+              1/(2*(zeta1+zeta2)) * (i*Si-1j-1 + (j-1)Sij-2)
+
+
 */
 
 namespace BUEHT
 {
 
   /*
+
+    This is the recursive function that used Equations 1-3 above to
+    solve for the one-dimensional overlap integral
+
+    We pass in s00 for efficiency and tidiness.
+ 
   */
 
   double Overlap_Recursion ( const double & s00, const double & p, 
@@ -44,7 +62,7 @@ namespace BUEHT
     }
     else if ( i == 0 && j == 0 )
     {
-      return s00;
+      return s00; // Equation 1 above
     }
     else
     {
@@ -67,6 +85,14 @@ namespace BUEHT
     }
   }
 
+  /*
+
+    This function calculates the overlap between two primitives. This
+    mainly serves to calculated termsm that are used in the recursive
+    solution defined above.
+
+  */
+
   double Overlap_PRIM ( const double & mu, const double & p, 
                         const double & dx, const double & dy, const double & dz,
                         const int & i1, const int & j1, const int & k1, 
@@ -83,6 +109,13 @@ namespace BUEHT
     return Overlap_Recursion(s00x,p,i1,i2,xpa,xpb)*Overlap_Recursion(s00y,p,j1,j2,ypa,ypb)*
            Overlap_Recursion(s00z,p,k1,k2,zpa,zpb);
   }
+
+  /*
+
+    THis function loops over the primitives, and calculates the overlap between each
+    pair, then sums the terms to obtain the overlap...
+
+  */
 
   double Overlap_BF (const BUEHT::Atom & atom1, const BUEHT::Atom & atom2,
                      const double & dx, const double & dy, const double & dz,
@@ -117,6 +150,22 @@ namespace BUEHT
     }
     return sum;
   }
+
+  /*
+  
+    Here we loop over all Basis Functions and calculate the overlap
+    between each pair.
+
+    We do some "extra" work here in that all N^2 are calculated
+    rather than just an upper triangle. THis is obviously wasteful,
+    but in this case with only atom-atom overlaps, the extra
+    work should be trivial...
+
+    We loop here also over all terms in the cartesian expansion of the
+    real spherical harmonic functions, where each term is then treated
+    as having N primitives...
+
+  */
 
   void Overlap ( const BUEHT::Atom & atom1, const BUEHT::Atom & atom2,
                     const BUEHT::BasisSet & basis1,
