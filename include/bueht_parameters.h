@@ -26,7 +26,8 @@ std::string bueht_supported_basis_sets[] = {
   "DEF2-SV(P)",
   "DEF2-SVP",
   "DEF2-TZVP",
-  "STO-3G"
+  "STO-3G",
+  "LANL2DZ"
 };
 
 std::map<char,int> bueht_angular_momentum{{'S',0},{'P',1},{'D',2},{'F',3},
