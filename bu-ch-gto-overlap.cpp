@@ -141,7 +141,7 @@ int main ( int argc, char* argv[] )
   for ( unsigned int i = 0; i < basis2.GetDimensions(); i++ )
   {
     std::cout << std::setw(5) << basis2.GetL_Char(shell_num);
-    if ( ( m_index + 1 ) == ( 2 * basis1.GetL(shell_num) + 1 ) )
+    if ( ( m_index + 1 ) == ( 2 * basis2.GetL(shell_num) + 1 ) )
     {
       shell_num++;
       m_index = 0;
