@@ -174,9 +174,9 @@ namespace BUEHT
   {
     int index = 0;
     double sum = 0.0;
-    double dx(atom2.GetX()-atom1.GetX());
-    double dy(atom2.GetY()-atom1.GetY());
-    double dz(atom2.GetZ()-atom1.GetZ());
+    double dx(atom1.GetX()-atom2.GetX());
+    double dy(atom1.GetY()-atom2.GetY());
+    double dz(atom1.GetZ()-atom2.GetZ());
     for( unsigned int i = 0; i < basis1.GetNumShells(); i++ )
     {
       for ( int k = -1*basis1.GetL(i); k <= basis1.GetL(i); k++ ) // -m .. m
