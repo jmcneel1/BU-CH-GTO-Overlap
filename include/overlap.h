@@ -196,14 +196,14 @@ namespace BUEHT
                         [
                           BUEHT::RealSphericalHarmonicsPtr
                           [
-                            basis1.GetL(i) * ( basis1.GetL(i) + 1 ) - k
+                            basis1.GetL(i) * ( basis1.GetL(i) + 1 ) + k
                           ] + m 
                         ].factor *
                         BUEHT::RealSphericalHarmonics
                         [
                           BUEHT::RealSphericalHarmonicsPtr
                           [
-                            basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
+                            basis2.GetL(j) * ( basis2.GetL(j) + 1 ) + l
                           ] + n 
                         ].factor *
                         BUEHT::Overlap_BF (atom1, atom2, dx, dy, dz,
@@ -213,42 +213,42 @@ namespace BUEHT
                                            [
                                              BUEHT::RealSphericalHarmonicsPtr
                                              [
-                                               basis1.GetL(i) * ( basis1.GetL(i) + 1 ) - k
+                                               basis1.GetL(i) * ( basis1.GetL(i) + 1 ) + k
                                              ] + m
                                            ].x,
                                            BUEHT::RealSphericalHarmonics
                                            [
                                              BUEHT::RealSphericalHarmonicsPtr
                                              [
-                                               basis1.GetL(i) * ( basis1.GetL(i) + 1 ) - k
+                                               basis1.GetL(i) * ( basis1.GetL(i) + 1 ) + k
                                              ] + m
                                            ].y,
                                            BUEHT::RealSphericalHarmonics
                                            [
                                              BUEHT::RealSphericalHarmonicsPtr
                                              [
-                                               basis1.GetL(i) * ( basis1.GetL(i) + 1 ) - k
+                                               basis1.GetL(i) * ( basis1.GetL(i) + 1 ) + k
                                              ] + m
                                            ].z,
                                            BUEHT::RealSphericalHarmonics
                                            [
                                              BUEHT::RealSphericalHarmonicsPtr
                                              [
-                                               basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
+                                               basis2.GetL(j) * ( basis2.GetL(j) + 1 ) + l
                                              ] + n
                                            ].x,
                                            BUEHT::RealSphericalHarmonics
                                            [
                                              BUEHT::RealSphericalHarmonicsPtr
                                              [
-                                               basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
+                                               basis2.GetL(j) * ( basis2.GetL(j) + 1 ) + l
                                              ] + n
                                            ].y,
                                            BUEHT::RealSphericalHarmonics
                                            [
                                              BUEHT::RealSphericalHarmonicsPtr
                                              [
-                                               basis2.GetL(j) * ( basis2.GetL(j) + 1 ) - l
+                                               basis2.GetL(j) * ( basis2.GetL(j) + 1 ) + l
                                              ] + n
                                            ].z)
                        );
