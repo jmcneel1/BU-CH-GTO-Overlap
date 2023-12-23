@@ -1,3 +1,5 @@
+import numpy as np
+
 with open('def2tzvp.out') as inFile:
 	lines = inFile.readlines()
 
@@ -21,8 +23,8 @@ index = 0
 while lines[index].find(" Group   1") == -1:
 	index = index + 1
 if num_groups == 1:
-	bs1_dim = dims/2
-	bs2_dim = dims/2
+	bs1_dim = int(dims/2)
+	bs2_dim = int(dims/2)
 	str1 = lines[index].split()[8]
 else:
 	str1 = lines[index].split()[8]
@@ -56,25 +58,54 @@ if iloc != -1:
 if str2 != "":
 	sloc2 = str2.find("s")
 	if sloc2 != -1:
-		print(str2[:sloc2])
+		ns2 = int(str2[:sloc2])
 	ploc2 = str2.find("p")
 	if ploc2 != -1:
-		print(str2[sloc2+1:ploc2])
+		np2 = int(str2[sloc2+1:ploc2])
 	dloc2 = str2.find("d")
 	if dloc2 != -1:
-		print(str2[ploc2+1:dloc2])
+		nd2 = int(str2[ploc2+1:dloc2])
 	floc2 = str2.find("f")
 	if floc2 != -1:
-		print(str2[dloc2+1:floc2])
+		nf2 = int(str2[dloc2+1:floc2])
 	gloc2 = str2.find("g")
 	if gloc2 != -1:
-		print(str2[floc2+1:gloc2])
+		ng2 = int(str2[floc2+1:gloc2])
 	hloc2 = str2.find("h")
 	if hloc2 != -1:
-		print(str2[gloc2+1:hloc2])
+		nh2 = int(str2[gloc2+1:hloc2])
 	iloc2 = str2.find("i")
 	if iloc2 != -1:
-		print(str2[hloc2+1:iloc2])
+		ni2 = int(str2[hloc2+1:iloc2])
+	bs1_dim = ns1 + 3*np1 + 5*nd1 + 7*nf1 + 9*ng1 + 11*nh1 + 13*ni1
+	bs2_dim = ns2 + 3*np2 + 5*nd2 + 7*nf2 + 9*ng2 + 11*nh2 + 13*ni2
+else:
+	ns2 = ns1
+	np2 = np1
+	nd2 = nd1
+	nf2 = nf1
+	ng2 = ng1
+	nh2 = nh1
+	ni2 = ni1
 
 
-print(ns1+3*np1)
+print(bs1_dim)
+
+ovlp = np.zeros((bs2_dim,bs1_dim))
+
+index = 0
+while lines[index].find("OVERLAP MATRIX") == -1:
+	index = index + 1
+index = index + 2
+
+for i in range(bs1_dim):
+	for j in range(bs2_dim):
+		if i < ns1:
+			if j < ns2:
+				print(lines[index + i//5 * (bs1_dim+bs2_dim) + 1 + bs1_dim + j])
+			elif j < ns2 + 3*np2:
+				print("j")
+		elif i < ns1 + 3*np1:
+			print("j")
+		elif i < ns1 + 3*np1 + 5*nd1:
+			print("m")
