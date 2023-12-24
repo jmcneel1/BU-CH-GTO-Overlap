@@ -88,9 +88,6 @@ else:
 	nh2 = nh1
 	ni2 = ni1
 
-
-print(bs1_dim)
-
 ovlp = np.zeros((bs2_dim,bs1_dim))
 
 index = 0
@@ -98,14 +95,34 @@ while lines[index].find("OVERLAP MATRIX") == -1:
 	index = index + 1
 index = index + 2
 
+print("     ", end="")
+for i in range(bs1_dim):
+	if i < ns1:
+		print("      S", end="")
+	elif i < ns1+3*np1:
+		print("      P", end="")
+	elif i < ns1+3*np1+5*nd1:
+		print("      D", end="")
+	elif i < ns1+3*np1+5*nd1+7*nf1:
+		print("      F", end="")
+print("")
 for i in range(bs1_dim):
 	for j in range(bs2_dim):
 		if i < ns1:
 			if j < ns2:
-				print(lines[index + i//5 * (bs1_dim+bs2_dim) + 1 + bs1_dim + j])
+				if j == 0:
+					print("    S", end="")
+				print("{:7.4f}".format(float(lines[index + i//5 * (bs1_dim+bs2_dim) + 1 + bs1_dim + j].split()[1+j%5])),end="")
+"""
+	for j in range(bs2_dim):
+		if i < ns1:
+			print("S")
+			if j < ns2:
+#				print(lines[index + i//5 * (bs1_dim+bs2_dim) + 1 + bs1_dim + j])
 			elif j < ns2 + 3*np2:
 				print("j")
 		elif i < ns1 + 3*np1:
 			print("j")
 		elif i < ns1 + 3*np1 + 5*nd1:
 			print("m")
+"""
