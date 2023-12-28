@@ -106,23 +106,99 @@ for i in range(bs1_dim):
 	elif i < ns1+3*np1+5*nd1+7*nf1:
 		print("      F", end="")
 print("")
-for i in range(bs1_dim):
-	for j in range(bs2_dim):
-		if i < ns1:
-			if j < ns2:
-				if j == 0:
-					print("    S", end="")
-				print("{:7.4f}".format(float(lines[index + i//5 * (bs1_dim+bs2_dim) + 1 + bs1_dim + j].split()[1+j%5])),end="")
-"""
-	for j in range(bs2_dim):
-		if i < ns1:
-			print("S")
-			if j < ns2:
-#				print(lines[index + i//5 * (bs1_dim+bs2_dim) + 1 + bs1_dim + j])
-			elif j < ns2 + 3*np2:
-				print("j")
-		elif i < ns1 + 3*np1:
-			print("j")
-		elif i < ns1 + 3*np1 + 5*nd1:
-			print("m")
-"""
+
+if (bs1_dim%6 != 0):
+	for j in range(bs1_dim//6+1):
+		for i in range(bs2_dim):
+			if j < bs1_dim // 6:
+				ovlp[i,j*6]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[1])
+				ovlp[i,j*6+1]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[2])
+				ovlp[i,j*6+2]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[3])
+				ovlp[i,j*6+3]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[4])
+				ovlp[i,j*6+4]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[5])
+				ovlp[i,j*6+5]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[6])
+			else:
+				for k in range(1,bs1_dim%6+1):
+					ovlp[i,j*6+k-1]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[k])
+else:
+	for j in range(bs1_dim//6):
+		for i in range(bs2_dim):
+			if j < bs1_dim // 6:
+				ovlp[i,j*6]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[1])
+				ovlp[i,j*6+1]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[2])
+				ovlp[i,j*6+2]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[3])
+				ovlp[i,j*6+3]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[4])
+				ovlp[i,j*6+4]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[5])
+				ovlp[i,j*6+5]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[6])
+			else:
+				for k in range(1,bs1_dim%6+1):
+					ovlp[i,j*6+k-1]=float(lines[1+bs1_dim+index+j*(bs1_dim+bs2_dim)+i].split()[k])
+
+pindex1 = 0
+pindex2 = 0
+for i in range(bs2_dim):
+	if i < ns2:
+		print("    S",end="")
+	elif i < ns2+3*np2:
+		print("    P",end="")
+	elif i < ns2+3*np2+5*nd2:
+		print("    D",end="")
+	for j in range(bs1_dim):
+		if i < ns2 and j < ns1:
+			print("{:7.3f}".format(ovlp[i,j]),end="")
+		elif i < ns2 and j < ns1+3*np1:
+			if pindex1 == 0:
+				print("{:7.3f}".format(ovlp[i,j+2]),end="")
+				pindex1 = 1
+			elif pindex1 == 1:
+				print("{:7.3f}".format(ovlp[i,j-1]),end="")
+				pindex1 = 2
+			else:
+				print("{:7.3f}".format(ovlp[i,j-1]),end="")
+				pindex1 = 0
+		elif i < ns2 + 3*np2 and j < ns1:
+			if pindex2 == 0:
+				print("{:7.3f}".format(ovlp[i+2,j]),end="")
+				if pindex1 == 2:
+					pindex2 = 1
+			elif pindex2 == 1:
+				print("{:7.3f}".format(ovlp[i-1,j]),end="")
+				if pindex1 == 2:
+					pindex2 = 2
+			elif pindex2 == 2:
+				print("{:7.3f}".format(ovlp[i-1,j]),end="")
+				if pindex1 == 2:
+					pindex2 = 0
+		elif i < ns2 + 3*np2 and j < ns1 + 3*np1:
+			if pindex1 == 0 and pindex2 == 0:
+				print("{:7.3f}".format(ovlp[i+2,j+2]),end="")
+				pindex1 = 1
+			elif pindex1 == 0 and pindex2 == 1:
+				print("{:7.3f}".format(ovlp[i-1,j+2]),end="")
+				pindex1 == 1
+			elif pindex1 == 0 and pindex2 == 2:
+				print("{:7.3f}".format(ovlp[i-1,j+2]),end="")
+				pindex1 = 1
+			elif pindex1 == 1 and pindex2 == 0:
+				print("{:7.3f}".format(ovlp[i+2,j-1]),end="")
+				pindex1 = 2
+			elif pindex1 == 1 and pindex2 == 1:
+				print("{:7.3f}".format(ovlp[i-1,j-1]),end="")
+				pindex1 = 2
+			elif pindex1 == 1 and pindex2 == 2:
+				print("{:7.3f}".format(ovlp[i-1,j-1]),end="")
+				pindex1 = 2
+			elif pindex1 == 2 and pindex2 == 0:
+				print("{:7.3f}".format(ovlp[i+2,j-1]),end="")
+				pindex1 = 0
+				pindex2 = 1
+			elif pindex1 == 2 and pindex2 == 1:
+				print("{:7.3f}".format(ovlp[i-1,j-1]),end="")
+				pindex1 = 0
+				pindex2 = 2
+			elif pindex1 == 2 and pindex2 == 2:
+				print("{:7.3f}".format(ovlp[i-1,j-1]),end="")
+				pindex1 = 0
+				pindex2 = 0
+	print("")
+
