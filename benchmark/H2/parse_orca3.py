@@ -1,6 +1,6 @@
 import numpy as np
 
-with open('def2tzvp.out') as inFile:
+with open('def2tzvp2.out') as inFile:
 	lines = inFile.readlines()
 
 index = 0
