@@ -1,4 +1,4 @@
-! sto-3g HF 
+! def2-tzvp HF 
 %output 
 Print [ P_Overlap ] 1 
 Print [ P_MOs ] 1
