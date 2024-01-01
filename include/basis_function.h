@@ -48,15 +48,12 @@ class BasisFunction
         this->myCoefficients = coeffs;
         for ( unsigned int i = 0; i < coeffs.size(); i++ )
         {
-          // N = (2*(2*zeta)^(3/4)/pi^(1/4))*sqrt(2^l/(2l+1)!!)*sqrt(2*zeta)^l
-         /* myNorms[i] = std::pow(bueht_pi,-0.25)*
-                       std::pow(2.e0,1.75+(double)l)*
-                       std::pow(BUEHT::DoubleFactorial(2*l+1),-0.5)*
-                       std::pow(myZetas[i],0.75+(double)l/2.e0); */
+
           myNorms[i] = std::pow(myZetas[i],0.75+(double)l/2.e0) *
                        std::pow(BUEHT::DoubleFactorial(2*l-1),-0.5) *
                        std::pow(bueht_pi,-0.75) *
                        std::pow(2.e0,0.75+double(l));
+
         }
       }
       else
