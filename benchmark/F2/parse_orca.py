@@ -138,6 +138,8 @@ pindex1 = 0
 pindex2 = 0
 dindex1 = 0
 dindex2 = 0
+findex1 = 0
+findex2 = 0
 for i in range(bs2_dim):
 	if i < ns2:
 		print("    S",end="")
@@ -145,6 +147,8 @@ for i in range(bs2_dim):
 		print("    P",end="")
 	elif i < ns2+3*np2+5*nd2:
 		print("    D",end="")
+	elif i < ns2+3*np2+5*nd2+7*nf2:
+		print("    F",end="")
 	for j in range(bs1_dim):
 		if i < ns2 and j < ns1:
 			print("{:7.3f}".format(ovlp[i,j]),end="")
@@ -161,15 +165,15 @@ for i in range(bs2_dim):
 		elif i < ns2 + 3*np2 and j < ns1:
 			if pindex2 == 0:
 				print("{:7.3f}".format(ovlp[i+2,j]),end="")
-				if pindex1 == 2:
+				if findex1 == 5:
 					pindex2 = 1
 			elif pindex2 == 1:
 				print("{:7.3f}".format(ovlp[i-1,j]),end="")
-				if pindex1 == 2:
+				if findex1 == 5:
 					pindex2 = 2
 			elif pindex2 == 2:
 				print("{:7.3f}".format(ovlp[i-1,j]),end="")
-				if pindex1 == 2:
+				if findex1 == 2:
 					pindex2 = 0
 		elif ( i < ( ns2 + 3*np2 )) and ( j < ( ns1 + 3*np1 )):
 			if pindex1 == 0 and pindex2 == 0:
@@ -193,16 +197,49 @@ for i in range(bs2_dim):
 			elif pindex1 == 2 and pindex2 == 0:
 				print("{:7.3f}".format(ovlp[i+2,j-1]),end="")
 				pindex1 = 0
-				pindex2 = 1
 			elif pindex1 == 2 and pindex2 == 1:
 				print("{:7.3f}".format(ovlp[i-1,j-1]),end="")
 				pindex1 = 0
-				pindex2 = 2
 			elif pindex1 == 2 and pindex2 == 2:
 				print("{:7.3f}".format(ovlp[i-1,j-1]),end="")
 				pindex1 = 0
-				pindex2 = 0
 		elif i < ns2 and j < ns1 + 3*np1 + 5*nd1:
-			
+			if dindex1 == 0:
+				print("{:7.3f}".format(ovlp[i,j+4]),end="")
+				dindex1 = 1
+			elif dindex1 == 1:
+				print("{:7.3f}".format(ovlp[i,j+1]),end="")
+				dindex1 = 2
+			elif dindex1 == 2:
+				print("{:7.3f}".format(ovlp[i,j-2]),end="")
+				dindex1 = 3
+			elif dindex1 == 3:
+				print("{:7.3f}".format(ovlp[i,j-2]),end="")
+				dindex1 = 4
+			elif dindex1 == 4:
+				print("{:7.3f}".format(ovlp[i,j-1]),end="")
+				dindex1 = 0
+		elif i < ns2 and j < ns1 + 3*np1 + 5*nd1 + 7*nf1:
+			if findex1 == 0:
+				print("{:7.3f}".format(ovlp[i,j+6]),end="")
+				findex1 = 1
+			elif findex1 == 1:
+				print("{:7.3f}".format(ovlp[i,j+3]),end="")
+				findex1 = 2
+			elif findex1 == 2:
+				print("{:7.3f}".format(ovlp[i,j]),end="")
+				findex1 = 3
+			elif findex1 == 3:
+				print("{:7.3f}".format(ovlp[i,j-3]),end="")
+				findex1 = 4
+			elif findex1 == 4:
+				print("{:7.3f}".format(ovlp[i,j-3]),end="")
+				findex1 = 5
+			elif findex1 == 5:
+				print("{:7.3f}".format(ovlp[i,j-2]),end="")
+				findex1 = 6
+			elif findex1 == 6:
+				print("{:7.3f}".format(ovlp[i,j-1]),end="")
+				findex1 = 0
 	print("")
 
