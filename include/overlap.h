@@ -73,8 +73,8 @@ namespace BUEHT
       }
       else if ( j == 0 )
       {
-        return xpa*Overlap_Recursion(s00,p,i-1,j,xpa,xpb)+(1.e0/(2.e0*p)*((double)j-1.e0)*
-                                     Overlap_Recursion(s00,p,i,j-1,xpa,xpb));
+        return xpa*Overlap_Recursion(s00,p,i-1,j,xpa,xpb)+(1.e0/(2.e0*p)*((double)i-1.e0)*
+                                     Overlap_Recursion(s00,p,i-2,j,xpa,xpb));
       }
       else
       {
