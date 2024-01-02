@@ -1,0 +1,9 @@
+! sarc2-dkh-qzvp HF 
+%output 
+Print [ P_Overlap ] 1 
+Print [ P_MOs ] 1
+end
+* xyz 6 3
+Ce 0.0 0.0 0.0
+Ce 0.4 0.6 0.8
+*

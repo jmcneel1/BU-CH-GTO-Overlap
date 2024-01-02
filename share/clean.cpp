@@ -5,8 +5,8 @@
 
 int main ()
 {
-  std::ifstream inFile("DEF2-QZVP.bs");
-  std::ofstream outFile("DEF2-QZVP.tmp.bs");
+  std::ifstream inFile("SARC2-DKH-QZVP.bs");
+  std::ofstream outFile("SARC2-DKH-QZVP.tmp.bs");
   std::string line, tmp, element;
   std::stringstream ss;
   int index;
