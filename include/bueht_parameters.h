@@ -26,6 +26,7 @@ std::string bueht_supported_basis_sets[] = {
   "DEF2-SV(P)",
   "DEF2-SVP",
   "DEF2-TZVP",
+  "DEF2-QZVP",
   "STO-3G",
   "LANL2DZ"
 };
